@@ -188,3 +188,56 @@ INSERT INTO alunos(id, nome, datas, primeira_nota, segunda_nota, curso_id) VALUE
 );
 
 ```
+
+<!-- PARTE 3 EXERCÍCIO SQL -->
+
+<!-- Capturando os alunos que nasceram antes de 2009 -->
+```sql
+SELECT * FROM alunos WHERE datas >= 2009/12/31;
+```
+
+<!--Capturando as notas inseridas no sistema e calculando a média definindo casas decimais -->
+```sql
+SELECT primeira_nota, segunda_nota, ROUND((primeira_nota + segunda_nota)/2 ,2) AS 'Média' FROM alunos;
+```
+
+<!-- Capturando os dados do curso/ carga e realizando o calculo de limite de faltas = 25%. -->
+```sql
+SELECT titulo, carga, (carga * 0.25) FROM cursos ORDER BY titulo;
+```
+
+<!-- Consultando os professores da área de desenvolvimento. -->
+```sql
+SELECT nome, area FROM professores WHERE area = 'desenvolvimento';
+```
+
+
+<!-- Consultando a quantidade de professores por área de atuação -->
+```sql
+SELECT area, COUNT(nome) AS professores FROM professores GROUP BY area;
+```
+
+
+<!-- Fazendo uma consulta que mostra o nome dos alunos ultilizando o INNER JOIN que busca dados de uma outra tabela. -->
+```sql
+SELECT alunos.nome AS alunos, titulo, cursos.carga FROM
+ alunos INNER JOIN cursos
+  ON alunos.curso_id = cursos.id 
+  ORDER BY alunos.nome;
+```
+
+<!-- Fazendo uma consulta que mostra o nome dos professores  ultilizando o INNER JOIN que busca busca dados -->
+```sql
+SELECT professores.nome AS alunos, titulo, professores FROM
+ professores INNER JOIN cursos
+  ON alunos.curso_id = cursos.id 
+  ORDER BY professores.nome;
+```
+
+```sql
+SELECT alunos.nome AS 'Alunos', cursos.titulo AS 'Cursos', professores.nome AS 'Professores' FROM alunos INNER JOIN cursos ON alunos.curso_id = cursos.id INNER JOIN professores ON cursos.professor_id = professores.id;
+```
+
+```sql
+
+```
