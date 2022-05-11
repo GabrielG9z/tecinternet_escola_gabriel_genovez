@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ```sql
 INSERT INTO professores (nome, area) VALUES ('Jon Oliva'),('infra');
 ```
@@ -186,5 +186,5 @@ INSERT INTO alunos(id, nome, datas, primeira_nota, segunda_nota, curso_id) VALUE
     9,
     1
 );
->>>>>>> 9717ffe1002422a387a6a6a4ad99a50f9d52c89d
+
 ```
