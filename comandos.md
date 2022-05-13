@@ -191,7 +191,7 @@ INSERT INTO alunos(id, nome, datas, primeira_nota, segunda_nota, curso_id) VALUE
 
 <!-- PARTE 3 EXERCÍCIO SQL -->
 
-<!-- Capturando os alunos que nasceram antes de 2009 -->
+<!-- Faça uma consulta que mostre os alunos que nasceram antes do ano 2009 -->
 ```sql
 SELECT * FROM alunos WHERE datas >= 2009/12/31;
 ```
@@ -234,10 +234,49 @@ SELECT professores.nome AS alunos, titulo, professores FROM
   ORDER BY professores.nome;
 ```
 
+<!-- Realizando uma consulta que mostre a quantidade de alunos que cada curso possui  -->
 ```sql
 SELECT alunos.nome AS 'Alunos', cursos.titulo AS 'Cursos', professores.nome AS 'Professores' FROM alunos INNER JOIN cursos ON alunos.curso_id = cursos.id INNER JOIN professores ON cursos.professor_id = professores.id;
 ```
 
-```sql
 
+<!-- Realizando uma consulta de que cada curso possui. Classificando os resultados em ordem decrescente com o DESC.  -->
+```sql
+SELECT(cursos.titulo) AS 'Cursos', COUNT(alunos.cursos_id) AS "Qtd Alunos" FROM alunos INNER JOIN cursos ON alunos.curso_id = cursos.id GROUP BY curso_id ORDER BY curso_id DESC 
 ```
+
+<!-- Fazendo uma consulta que traz o nome dos alunos,notas,médias e os titulos dos cursos. e estão sendo exibidos apenas os alunos de FRONT/BACK-End -->
+```sql
+SELECT nome, primeira_nota, segunda_nota, ROUND((primeira_nota + segunda_nota)/2) AS 'Média',cursos.titulo FROM alunos INNER JOIN cursos ON alunos.curso_id = cursos.id WHERE cursos.titulo = 'Front-End' OR cursos.titulo = 'Back-End' GROUP BY alunos.nome ORDER BY alunos.nome ASC;
+```
+
+```sql
+UPDATE cursos SET titulo 'Adobe XD' WHERE id = 4  UPDATE cursos SET carga = 15 WHERE id = 4
+```
+
+```sql
+SELECT alunos.nome, cursos.titulo FROM alunos INNER JOIN cursos ON alunos.curso_id = cursos.id ORDER BY alunos.nome;
+```
+
+<!-- DESAFIOS -->
+
+```sql
+--Criar uma consulta que calcule a idade do aluno
+SELECT nome AS Nome, TIMESTAMPDIFF(YEAR, nascimento, curdate()) AS Idade FROM alunos;
+```
+
+```sql
+--Criar uma consulta  que calcule a média das notas de cada aluno e mostre somente os alunos que tiveram a nota >= 7
+SELECT nome, primeira_nota, segunda_nota, ROUND((primeira_nota+segunda_nota)/2) AS Média FROM alunos WHERE (primeira_nota+segunda_nota)/2 >= 7;
+```
+
+```sql
+-- Criar uma consulta que calcule a média das notas de cada aluno e mostre somente os alunos que tiveram a média menor que 7
+SELECT nome, primeira_nota, segunda_nota, ROUND((primeira_nota+segunda_nota)/2) AS Média FROM alunos WHERE (primeira_nota+segunda_nota)/2 < 7;
+```
+
+```sql
+-- Criar uma consulta que mostre a quantidade de alunos com média <= 7
+SELECT COUNT((primeira_nota+segunda_nota)/2) AS 'Qtd alunos com média acima ou igual à 7' FROM alunos WHERE (primeira_nota+segunda_nota)/2 >= 7;
+```
+<!-- FIM Desafios -->
